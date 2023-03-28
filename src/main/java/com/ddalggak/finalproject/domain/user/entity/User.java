@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.ddalggak.finalproject.domain.label.entity.LabelUser;
-import com.ddalggak.finalproject.domain.oauth.ProviderType;
 import com.ddalggak.finalproject.domain.project.entity.ProjectUser;
 import com.ddalggak.finalproject.domain.task.entity.TaskUser;
 import com.ddalggak.finalproject.domain.user.role.UserRole;
@@ -59,35 +58,12 @@ public class User extends BaseTimeEntity {
 	@OneToMany(mappedBy = "user")
 	List<LabelUser> labelUserList = new ArrayList<>();
 
-	@Column
-	@Enumerated(EnumType.STRING)
-	private ProviderType providerType;
-
 	public User(Long userId, String email, String nickname, String password, String profile, UserRole role) {
 		this.userId = userId;
 		this.email = email;
 		this.nickname = nickname;
 		this.password = password;
 		this.profile = profile;
-		this.role = UserRole.USER;
-	}
-
-	public User updateNickname(String nickname) {
-		this.nickname = nickname;
-		return User.builder()
-			.nickname(nickname)
-			.build();
-	}
-
-	public User updateProfile(String profile) {
-		this.profile = profile;
-		return User.builder()
-			.profile(profile)
-			.build();
-	}
-
-	public User emailUpdate(String email) {
-		this.email = email;
-		return this;
+		this.role = role;
 	}
 }
